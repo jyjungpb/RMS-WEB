@@ -1,0 +1,65 @@
+"use client";
+
+import React, { createContext, useContext, useState, useCallback, ReactNode, useEffect } from "react";
+import ErrorPopup from "@/components/common/error_popup";
+import { registerGlobalErrorHandler } from "@/lib/api/client"; // ★ 변경 포인트
+
+interface ErrorContextType {
+  showError: (title?: string, message?: string, subMessage?: string) => void;
+  hideError: () => void;
+}
+
+const ErrorContext = createContext<ErrorContextType | undefined>(undefined);
+
+interface ErrorProviderProps {
+  children: ReactNode;
+}
+
+export function ErrorProvider({ children }: ErrorProviderProps) {
+  const [errorState, setErrorState] = useState({
+    isOpen: false,
+    title: "",
+    message: "",
+    subMessage: "",
+  });
+
+  const showError = useCallback((title?: string, message?: string, subMessage?: string) => {
+    setErrorState({
+      isOpen: true,
+      title: title || "오류",
+      message: message || "요청 처리 중 오류가 발생했습니다.",
+      subMessage: subMessage || "",
+    });
+  }, []);
+
+  const hideError = useCallback(() => {
+    setErrorState(prev => ({ ...prev, isOpen: false }));
+  }, []);
+
+  // API 클라이언트에 전역 에러 핸들러 등록
+  useEffect(() => {
+    const eject = registerGlobalErrorHandler(showError); // ★ 등록
+    return () => eject(); // ★ 해제
+  }, [showError]);
+
+  return (
+    <ErrorContext.Provider value={{ showError, hideError }}>
+      {children}
+      <ErrorPopup
+        isOpen={errorState.isOpen}
+        onClose={hideError}
+        title={errorState.title}
+        message={errorState.message}
+        subMessage={errorState.subMessage}
+      />
+    </ErrorContext.Provider>
+  );
+}
+
+export function useError() {
+  const context = useContext(ErrorContext);
+  if (context === undefined) {
+    throw new Error("useError must be used within an ErrorProvider");
+  }
+  return context;
+}
