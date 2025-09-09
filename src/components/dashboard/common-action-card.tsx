@@ -21,6 +21,9 @@ export interface CommonActionCardProps {
   onButtonClick?: () => void;
   buttonClassName?: string; // 버튼 테두리/배경/텍스트/hover 모두 여기서 제어
   buttonDisabled?: boolean;
+  buttonBorderColor?: string;
+  buttonBgColor?: string;
+  buttonTextColor?: string;
 
   // 크기 조정용(필요 시)
   className?: string; // 카드 바깥 wrapper에 추가
@@ -35,6 +38,10 @@ export function CommonActionCard({
   dateLabel = "YYYY-MM-DD 00:00:00",
   footerStatus = "원격 연결 대기중",
   buttonText = "원격 연결하기",
+  buttonBorderColor = "",
+  buttonBgColor = "",
+  buttonTextColor = "",
+
   onButtonClick,
   buttonClassName,
   buttonDisabled,
@@ -52,7 +59,9 @@ export function CommonActionCard({
       <div className="flex items-center justify-between gap-3">
         <div
           className={cn(
-            "flex items-center justify-center rounded-md w-[94px] h-14 text-sm font-normal text-white bg-[#007BF7]",
+            "flex items-center justify-center rounded-md w-[94px] h-16 text-sm border",
+
+            "font-normal border-[#007BF7] text-white bg-[#007BF7]",
             badgeClassName
           )}
         >
@@ -65,8 +74,10 @@ export function CommonActionCard({
           onClick={onButtonClick}
           className={cn(
             // 기본값: Figma의 outline 스타일에 가까운 값
-            "h-14 w-[146px] rounded-md border text-[16px] font-medium",
-            "border-[#90A1B2] bg-white text-[#007BF7] hover:bg-[#F5F9FF]",
+            "h-16 w-[146px] rounded-md border text-[16px] font-medium",
+            "hover:bg-[buttonBgColor] hover:text-[buttonTextColor] hover:border-[buttonBorderColor]",
+            "active:bg-[buttonBgColor] active:text-[buttonTextColor] active:border-[buttonBorderColor]",
+            "border-[buttonBorderColor] bg-[buttonBgColor] text-[buttonTextColor]",
             buttonClassName
           )}
         >
@@ -77,13 +88,13 @@ export function CommonActionCard({
       {/* 본문 정보 3줄 */}
       <div className="mt-1 space-y-2">
         <div className="flex items-center justify-center">
-          <p className="text-[12px] font-semibold text-[#3A4753]">{name}</p>
+          <p className="text-[12px] font-semibold text-[#383E46]">{name}</p>
         </div>
         <div className="flex items-center justify-center">
-          <p className="text-[12px] font-semibold text-[#3A4753]">{serial}</p>
+          <p className="text-[12px] font-semibold text-[#383E46]">{serial}</p>
         </div>
         <div className="flex items-center justify-center">
-          <p className="text-[12px] text-[#3A4753]">{dateLabel}</p>
+          <p className="text-[12px] text-[#383E46]">{dateLabel}</p>
         </div>
       </div>
 
@@ -92,7 +103,7 @@ export function CommonActionCard({
 
       {/* 하단 상태 텍스트 */}
       <div className="flex items-center justify-center">
-        <p className="text-[12px] font-medium text-[#3A4753]">{footerStatus}</p>
+        <p className="text-[12px] font-medium text-[#383E46]">{footerStatus}</p>
       </div>
     </Card>
   );

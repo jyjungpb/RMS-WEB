@@ -10,8 +10,9 @@ import { Button } from "@/components/ui/button-enhanced";
 import { Card, CardContent } from "@/components/ui/card";
 import { Rowdies } from "next/font/google";
 import { useState } from "react";
+import {ConnectCountCard} from "@/components/dashboard/connect_count_card";
 
-export default function DashBoardPage() {
+export default function AnalyzerListPage() {
   const [navigationItems, setNavigationItems] = useState<NavigationItem[]>(
     createDefaultNavigationItems()
   );
@@ -92,37 +93,99 @@ export default function DashBoardPage() {
         </Card>
       </div>
       <div className="w-1920px h-[1px] bg-[#CFCFCF] flex-none" />
-      <div className="grid grid-cols-2 w-full h-screen">
-        <div className="border-r-1 border-[#CFCFCF] p-4 h-full">
-          <CommonActionCard
-            cardClassName="bg-[#F5F9FF] border-[#D3DDE7]"
-            badgeText="###"
-            badgeClassName="bg-[#007BF7] text-white"
-            name="Exdia PT10"
-            serial="PCKA0-A00099"
-            dateLabel="2024-01-15 14:30:25"
-            footerStatus="원격 연결 대기중"
-            buttonText="원격 연결하기"
-            buttonClassName="border-[#90A1B2] bg-white text-[#007BF7] hover:bg-[#EEF5FF]"
-            onButtonClick={() => console.log("connect")}
-          />
-        </div>
-        
-        <div className="p-4">
-          {/* 오른쪽 */}
+      <div className="flex justify-center items-center">
+        <div className="grid grid-cols-2 min-w-[1200px]  ">
+          {/* body 관리자 원격 연결 대기중 검사기  */}
+          <div className="border-r-1 border-[#CFCFCF] p-3 h-full">
 
-          <CommonActionCard
-            cardClassName="bg-[#F5F9FF] border-[#D3DDE7]"
-            badgeText="###"
-            badgeClassName="bg-[#007BF7] text-white"
-            name="Exdia PT10"
-            serial="PCKA0-A00099"
-            dateLabel="2024-01-15 14:30:25"
-            footerStatus="원격 연결 대기중"
-            buttonText="원격 연결하기"
-            buttonClassName="border-[#90A1B2] bg-white text-[#007BF7] hover:bg-[#EEF5FF]"
-            onButtonClick={() => console.log("connect")}
-          />
+          <ConnectCountCard cardClassName = 'bg-[#FAF9FF] border-[#007BF7]' title="원격 연결 대기중 검사기" deviceCount="3"/>
+          
+            <div className="grid grid-cols-2  gap-x-6 gap-y-[14px]">
+              <CommonActionCard 
+                badgeText="###"
+                badgeClassName="bg-[#007BF7] text-white"
+                name="Exdia PT10"
+                serial="PCKA0-A00099"
+                dateLabel="2024-01-15 14:30:25"
+                footerStatus="원격 연결 대기중2"
+                buttonText="원격 연결하기"
+                buttonClassName="border-[#007DFA] bg-white text-[#007DFA]"
+
+                onButtonClick={() => console.log("connect")}
+              />
+              <CommonActionCard
+                badgeText="###"
+                badgeClassName="bg-[#007BF7] text-white"
+                name="Exdia PT10"
+                serial="PCKA0-A00099"
+                dateLabel="2024-01-15 14:30:25"
+                footerStatus="원격 연결 대기중"
+                buttonText="원격 연결하기"
+                buttonClassName="border-[#007DFA] bg-white text-[#007DFA]"
+
+                onButtonClick={() => console.log("connect")}
+              />
+              <CommonActionCard
+                badgeText="###"
+                badgeClassName="bg-[#007BF7] text-white"
+                name="Exdia PT10"
+                serial="PCKA0-A00099" 
+                dateLabel="2024-01-15 14:30:25"
+                footerStatus="원격 연결 대기중"
+                buttonText="원격 연결하기" 
+                buttonClassName="border-[#007DFA] bg-white text-[#007DFA]"
+
+                onButtonClick={() => console.log("connect")}
+              />
+            </div>
+          </div>
+          {/* body 관리자 원격 연결된 검사기  */}
+
+          <div className="  p-3 h-full">
+          <ConnectCountCard cardClassName = 'bg-[#F7FFFD] border-[#00AE86]' title="연결된 검사기" deviceCount="3"/>
+
+            <div className="grid grid-cols-2 gap-x-6 gap-y-[14px] ">
+              <CommonActionCard
+                            cardClassName = "border-[#C6C9CE] bg-[#F7FFFD] "
+
+                badgeText="###"
+                badgeClassName="border-[#00AE86] bg-white text-[#3A4753]" 
+                name="Exdia PT10"
+                serial="PCKA0-A00099"
+                dateLabel="2024-01-15 14:30:25"
+                footerStatus="원격 연결 대기중"
+                buttonText="원격 연결하기"
+                
+                buttonClassName="border-[#00AE86] bg-[#00AE86] text-white"
+                onButtonClick={() => console.log("connect")}
+              />
+              <CommonActionCard
+                            cardClassName = "border-[#C6C9CE] bg-[#F7FFFD] "
+
+                badgeText="###"
+                badgeClassName="border-[#00AE86] bg-white text-[#3A4753]" 
+                name="Exdia PT10"
+                serial="PCKA0-A00099"
+                dateLabel="2024-01-15 14:30:25"
+                footerStatus="원격 연결 대기중"
+                buttonText="원격 연결하기"
+                buttonClassName="border-[#00AE86] bg-[#00AE86] text-white"
+                onButtonClick={() => console.log("connect")}
+              />
+              <CommonActionCard
+              cardClassName = "border-[#C6C9CE] bg-[#F7FFFD] "
+                badgeText="###"
+                badgeClassName="border-[#00AE86] bg-white text-[#3A4753]" 
+                name="Exdia PT10"
+                serial="PCKA0-A00099"
+                dateLabel="2024-01-15 14:30:25"
+                footerStatus="원격 연결 대기중"
+                buttonText="원격 연결하기"
+                buttonClassName="border-[#00AE86] bg-[#00AE86] text-white"
+                onButtonClick={() => console.log("connect")}
+              />
+            </div>
+          </div>
         </div>
       </div>
     </div>
