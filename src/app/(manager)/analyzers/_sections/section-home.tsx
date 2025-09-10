@@ -1,105 +1,54 @@
+// src/app/analyzers/_sections/section-home-list.tsx
+
 "use client";
 
-import { Button } from "@/components/ui/button-enhanced";
-import { Card, CardContent } from "@/components/ui/card";
-import CommonActionCard from "@/components/dashboard/common-action-card";
-import { ConnectCountCard } from "@/components/dashboard/connect_count_card";
 
-export default function HomeSection() {
+
+import { cn } from "@/lib/utils";
+import HomeInfoCard from "@/components/home/home-info-card";
+
+import HomeVersionCard from "@/components/home/home-version-card";
+import VersionInfoBar from "@/components/dashboard/version-info-bar";
+import HomeCountCard from "@/components/home/home-count-card";
+import { images } from "@/utils/constants/images";
+import HomeFileCard from "@/components/home/home-file-card";
+import FilterSelectDemoPage from "@/app/(dashboard)/filter-select-demo/page";
+
+export default function HomeSection() { 
+
+
+
   return (
-    <>
-      {/* 상단 버튼/카드 */}
-      <div className="flex justify-center items-center gap-6 pb-[12px] pt-[14px]">
-        <Button state="outline" className="w-[282px] h-[96px] text-[16px]">
-          원격 해지하기
-        </Button>
+    <div className={cn(" bg-[#F7F8FF] min-h-screen min-w-[1200px] w-screen flex flex-col")}> 
+        {/* <FilterSelectDemoPage></FilterSelectDemoPage> */}
 
-        <Card className="w-[282px] h-24 bg-[#59d1e6] rounded-md border border-solid border-light-gray600">
-          <CardContent className="flex items-center justify-center h-full p-2">
-            <div className="font-semibold text-white text-xl">###</div>
-          </CardContent>
-        </Card>
+    <div className=" no-scrollbar">
+  
+        <div className={cn(" flex justify-center items-center gap-[24px] pt-[14px]")}>
+        <HomeInfoCard title="모델명" content="Exdia PT10"/>
+        <HomeInfoCard title="검사기 S/N" content="Exdia PT10"/>
+        <HomeInfoCard title="연결 채널" content="Exdia PT10"/>
+        <HomeInfoCard title="원격 유지 시간" content="Exdia PT10"/>
+        </div> 
+        <div className={cn(" flex justify-center items-center py-6 ")}>
+        <HomeVersionCard 
+        
+        items={[
+          { label: "시스템 버전", version: "1.00.14.0006" },
+          { label: "어플리케이션 버전", version: "2.08.04.0001" },
+          { label: "XML 버전", version: "1.08.16.0002" },
+        ]}
+        />
+        </div>  
+        <div className="min-w-[1200px] w-scree items-center flex flex-row justify-center gap-6"> 
+        <HomeCountCard title="검사 개수" count="9999"date="최근 진단 일시 9999-99-99 12:12:12" iconImgPath={images.testCountIcon.src} className="bg-[#FCFBFF] border-[#DDD4E9] /"/>
+        <HomeCountCard title="검사 개수" count="9999"date="최근 진단 일시 9999-99-99 12:12:12" iconImgPath={images.errorCountIcon.src} className="bg-[#F8FBFF] border-[#BFCEF0]"textCn="text-[#003AAD]" iconCn="bg-[#BDC8E0]" />
+        <HomeFileCard title="로그 다운로드" className="bg-[#FAFFFF] border-[#CDE5E4]" btnText="로그 다운" content="test"/> 
+        <HomeFileCard title="화면 보호기" className="bg-[#FEFFFC] border-[#D4DBCB]" btnText="파일 선택" content="test" useLog={false}/>
 
-        <Card className="w-[282px] h-24 bg-[#86b4f0] rounded-md border border-solid border-light-gray600">
-          <CardContent className="flex flex-col gap-4 p-4 items-start">
-            <div className="flex items-center justify-center w-full h-6">
-              <div className="text-white text-sm">PCKA0-A00099</div>
-            </div>
-            <div className="flex items-center justify-center w-full h-6">
-              <div className="text-white text-base font-semibold">Exdia PT10</div>
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card className="w-[282px] h-24 bg-[#23A8DC] rounded-md border border-solid border-light-gray600">
-          <CardContent className="flex flex-col gap-4 p-4 items-start">
-            <div className="flex items-center justify-center w-full h-6">
-              <div className="text-white text-sm">PCKA0-A00099</div>
-            </div>
-            <div className="flex items-center justify-center w-full h-6">
-              <div className="text-white text-base font-semibold">Exdia PT10</div>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-
-      <div className="w-full h-[1px] bg-[#CFCFCF]" />
-
-      {/* 좌/우 그리드 */}
-      <div className="flex justify-center items-center">
-        <div className="grid grid-cols-2 min-w-[1200px]">
-          {/* 왼쪽 */}
-          <div className="border-r border-[#CFCFCF] p-3 h-full">
-            <ConnectCountCard
-              cardClassName="bg-[#FAF9FF] border-[#007BF7]"
-              title="원격 연결 대기중 검사기"
-              deviceCount="3"
-            />
-            <div className="grid grid-cols-2 gap-x-6 gap-y-[14px]">
-              {[0, 1, 2].map((i) => (
-                <CommonActionCard
-                  key={`left-${i}`}
-                  badgeText="###"
-                  badgeClassName="bg-[#007BF7] text-white"
-                  name="Exdia PT10"
-                  serial="PCKA0-A00099"
-                  dateLabel="2024-01-15 14:30:25"
-                  footerStatus="원격 연결 대기중"
-                  buttonText="원격 연결하기"
-                  buttonClassName="border-[#007DFA] bg-white text-[#007DFA]"
-                  onButtonClick={() => console.log("connect")}
-                />
-              ))}
-            </div>
-          </div>
-
-          {/* 오른쪽 */}
-          <div className="p-3 h-full">
-            <ConnectCountCard
-              cardClassName="bg-[#F7FFFD] border-[#00AE86]"
-              title="연결된 검사기"
-              deviceCount="3"
-            />
-            <div className="grid grid-cols-2 gap-x-6 gap-y-[14px]">
-              {[0, 1, 2].map((i) => (
-                <CommonActionCard
-                  key={`right-${i}`}
-                  cardClassName="border-[#C6C9CE] bg-[#F7FFFD]"
-                  badgeText="###"
-                  badgeClassName="border-[#00AE86] bg-white text-[#3A4753]"
-                  name="Exdia PT10"
-                  serial="PCKA0-A00099"
-                  dateLabel="2024-01-15 14:30:25"
-                  footerStatus="원격 연결 대기중"
-                  buttonText="원격 연결하기"
-                  buttonClassName="border-[#00AE86] bg-[#00AE86] text-white"
-                  onButtonClick={() => console.log("connect")}
-                />
-              ))}
-            </div>
-          </div>
         </div>
-      </div>
-    </>
+    </div>
+  </div>
   );
 }
+

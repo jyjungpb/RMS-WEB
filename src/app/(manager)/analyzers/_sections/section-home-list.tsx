@@ -2,36 +2,17 @@
 
 "use client";
 
-import { HomeHeader } from "@/components/dashboard/home_header";
-import {
-  NavigationMenu,
-  NavigationItem,
-  createDefaultNavigationItems,
-} from "@/components/dashboard/navigation-menu";
+
 import { Button } from "@/components/ui/button-enhanced";
 import { Card, CardContent } from "@/components/ui/card";
-import { useState } from "react";
-import { ConnectCountCard } from "@/components/dashboard/connect_count_card";
+import { ConnectCountCard } from "@/components/dashboard/connect-count-card";
 
 export default function AnalyzerListPage() {
-  const [navigationItems, setNavigationItems] = useState<NavigationItem[]>(
-    createDefaultNavigationItems()
-  );
 
-  const handleNavigationClick = (clickedItem: NavigationItem) => {
-    console.log("Navigation clicked:", clickedItem);
 
-    // 활성 아이템 변경
-    setNavigationItems((prev) =>
-      prev.map((item) => ({
-        ...item,
-        isActive: item.id === clickedItem.id,
-      }))
-    );
-  };
 
   return (
-    <div className="min-h-screen min-w-[1200px] bg-white">
+    <div className="min-h-screen min-w-[1200px] bg-white "> 
 
 
       {/* body 원격해지하기 btn */}
@@ -85,13 +66,14 @@ export default function AnalyzerListPage() {
             </div>
           </CardContent>
         </Card>
-      </div>
-      <div className="w-1920px h-[1px] bg-[#CFCFCF] flex-none" />
-      <div className="flex justify-center items-center">
-        <div className="grid grid-cols-2 min-w-[1200px]  ">
-          {/* body 관리자 원격 연결 대기중 검사기  */}
-          <div className="border-r-1 border-[#CFCFCF] p-3 h-full">
-            <ConnectCountCard
+      </div>    
+      <div className="w-screen h-[1px] bg-[#CFCFCF] flex-none"/>
+      <div className="flex justify-center items-stretch h-screen  "> 
+         
+        <div className="grid grid-cols-2 min-w-[1200px] ">
+          {/* body 관리자 원격 연결 대기중 검사기  */} 
+          <div className="border-r border-[#CFCFCF] p-3  self-stretch flex-none">  
+          <ConnectCountCard
               cardClassName="bg-[#FAF9FF] border-[#007BF7]"
               title="원격 연결 대기중 검사기"
               deviceCount="3"
@@ -135,7 +117,7 @@ export default function AnalyzerListPage() {
           </div>
           {/* body 관리자 원격 연결된 검사기  */}
 
-          <div className="  p-3 h-full">
+          <div className="  p-3 h-screen"> 
             <ConnectCountCard
               cardClassName="bg-[#F7FFFD] border-[#00AE86]"
               title="연결된 검사기"

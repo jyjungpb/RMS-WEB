@@ -73,7 +73,7 @@ export function HomeHeader({
   return (
     <div
       className={cn(
-        "flex overflow-x-auto items-center justify-center",
+        "flex overflow-x-auto items-center justify-center sm:overflow-x-hidden no-scrollbar", 
         className
       )}
     >
