@@ -3,7 +3,7 @@ import { SvgIcon } from "../common/svg_icon";
 import { images } from "@/utils/constants/images";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
-import { Button } from "../ui/button-enhanced";
+import { Button } from "@/components/ui/button-enhanced";
 
 export interface HomeFileProps {
   title: string;
