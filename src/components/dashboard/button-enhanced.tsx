@@ -39,7 +39,10 @@ export interface ButtonEnhancedProps {
   autoFocus?: boolean;
 }
 
-export const ButtonEnhanced = React.forwardRef<HTMLButtonElement, ButtonEnhancedProps>(
+export const ButtonEnhanced = React.forwardRef<
+  HTMLButtonElement,
+  ButtonEnhancedProps
+>(
   (
     {
       children,
@@ -65,7 +68,8 @@ export const ButtonEnhanced = React.forwardRef<HTMLButtonElement, ButtonEnhanced
     ref
   ) => {
     // 내부 상태
-    const [internalState, setInternalState] = React.useState<ButtonEnhancedProps["state"]>(state);
+    const [internalState, setInternalState] =
+      React.useState<ButtonEnhancedProps["state"]>(state);
     const [isPressed, setIsPressed] = React.useState(false);
 
     // 외부 state 변경 시 동기화 (controlled-like)
@@ -92,17 +96,53 @@ export const ButtonEnhanced = React.forwardRef<HTMLButtonElement, ButtonEnhanced
     const getSizeStyles = () => {
       switch (size) {
         case "giant":
-          return { padding: "px-8 py-4", fontSize: "text-lg",  height: "h-[96px]", iconSize: "w-6 h-6", gap: "gap-3" };
+          return {
+            padding: "px-8 py-4",
+            fontSize: "text-lg",
+            height: "h-[96px]",
+            iconSize: "w-6 h-6",
+            gap: "gap-3",
+          };
         case "large":
-          return { padding: "px-6 py-3", fontSize: "text-base", height: "h-[56px]", iconSize: "w-5 h-5", gap: "gap-2" };
+          return {
+            padding: "px-6 py-3",
+            fontSize: "text-base",
+            height: "h-[56px]",
+            iconSize: "w-5 h-5",
+            gap: "gap-2",
+          };
         case "medium":
-          return { padding: "px-4 py-2", fontSize: "text-sm",  height: "h-[40px]", iconSize: "w-4 h-4", gap: "gap-2" };
+          return {
+            padding: "px-4 py-2",
+            fontSize: "text-sm",
+            height: "h-[40px]",
+            iconSize: "w-4 h-4",
+            gap: "gap-2",
+          };
         case "small":
-          return { padding: "px-3 py-1.5", fontSize: "text-xs", height: "h-[34px]", iconSize: "w-3 h-3", gap: "gap-1.5" };
+          return {
+            padding: "px-1.5 py-1.5",
+            fontSize: "text-xs", 
+            height: "h-[34px]",
+            iconSize: "w-[18px] h-[18px]",
+            gap: "gap-1",
+          };
         case "tiny":
-          return { padding: "px-2 py-1", fontSize: "text-xs", height: "h-6", iconSize: "w-3 h-3", gap: "gap-1" };
+          return {
+            padding: "px-2 py-1",
+            fontSize: "text-xs",
+            height: "h-6",
+            iconSize: "w-3 h-3",
+            gap: "gap-1",
+          };
         default:
-          return { padding: "px-4 py-2", fontSize: "text-sm", height: "h-10", iconSize: "w-4 h-4", gap: "gap-2" };
+          return {
+            padding: "px-4 py-2",
+            fontSize: "text-sm",
+            height: "h-10",
+            iconSize: "w-4 h-4",
+            gap: "gap-2",
+          };
       }
     };
 
@@ -114,8 +154,9 @@ export const ButtonEnhanced = React.forwardRef<HTMLButtonElement, ButtonEnhanced
             default: "bg-white text-[#007DFA] border-[#007BF7] shadow-none",
             enabled: "bg-[#007BF7] text-white border-[#007BF7] shadow-none",
             hover: "bg-[#001D9E] text-white border-[#001D9E] shadow-sm",
-            pressed: "bg-[#0C35E9] text-white border-[#0C35E9] shadow-none", 
-            disabled: "bg-[#FAFAFA] text-[#DDDFE2] border-[#E7EAED] shadow-none",
+            pressed: "bg-[#0C35E9] text-white border-[#0C35E9] shadow-none",
+            disabled:
+              "bg-[#FAFAFA] text-[#DDDFE2] border-[#E7EAED] shadow-none",
           };
         case "outline":
           return {
@@ -127,11 +168,15 @@ export const ButtonEnhanced = React.forwardRef<HTMLButtonElement, ButtonEnhanced
           };
         case "text":
           return {
-            default: "bg-transparent text-[#677888] border-transparent shadow-none",
-            enabled: "bg-transparent text-[#007BF7] border-transparent shadow-none",
+            default:
+              "bg-transparent text-[#677888] border-transparent shadow-none",
+            enabled:
+              "bg-transparent text-[#007BF7] border-transparent shadow-none",
             hover: "bg-transparent text-[#001D9E] border-transparent shadow-sm",
-            pressed: "bg-transparent text-[#0C35E9] border-transparent shadow-none",
-            disabled: "bg-transparent text-[#D2D4D7] border-transparent shadow-none",
+            pressed:
+              "bg-transparent text-[#0C35E9] border-transparent shadow-none",
+            disabled:
+              "bg-transparent text-[#D2D4D7] border-transparent shadow-none",
           };
         default:
           return {
@@ -152,7 +197,9 @@ export const ButtonEnhanced = React.forwardRef<HTMLButtonElement, ButtonEnhanced
       if (disabled) return;
       setIsPressed(true);
       // 포인터 캡처: 밖으로 나가도 up/cancel이 버튼으로 귀속
-      try { e.currentTarget.setPointerCapture(e.pointerId); } catch {}
+      try {
+        e.currentTarget.setPointerCapture(e.pointerId);
+      } catch {}
       // 하위 호환: 기존 mouseDown 콜백 호출
       onMouseDown?.(e as unknown as React.MouseEvent<HTMLButtonElement>);
     };
@@ -160,7 +207,9 @@ export const ButtonEnhanced = React.forwardRef<HTMLButtonElement, ButtonEnhanced
     const handlePointerUp = (e: React.PointerEvent<HTMLButtonElement>) => {
       if (disabled) return;
       setIsPressed(false);
-      try { e.currentTarget.releasePointerCapture(e.pointerId); } catch {}
+      try {
+        e.currentTarget.releasePointerCapture(e.pointerId);
+      } catch {}
       onMouseUp?.(e as unknown as React.MouseEvent<HTMLButtonElement>);
     };
 
@@ -178,7 +227,9 @@ export const ButtonEnhanced = React.forwardRef<HTMLButtonElement, ButtonEnhanced
     const handlePointerCancel = (e: React.PointerEvent<HTMLButtonElement>) => {
       // 스크롤 간섭/OS 제스처 등으로 취소될 때 안전 복구
       setIsPressed(false);
-      try { e.currentTarget.releasePointerCapture(e.pointerId); } catch {}
+      try {
+        e.currentTarget.releasePointerCapture(e.pointerId);
+      } catch {}
     };
 
     const handleLostPointerCapture = () => {
@@ -209,7 +260,11 @@ export const ButtonEnhanced = React.forwardRef<HTMLButtonElement, ButtonEnhanced
         case "left-icon":
           return (
             <>
-              {leftIcon && <span className={cn(sizeStyles.iconSize, "flex-shrink-0")}>{leftIcon}</span>}
+              {leftIcon && (
+                <span className={cn(sizeStyles.iconSize, "flex-shrink-0")}>
+                  {leftIcon}
+                </span>
+              )}
               {text && <span className="flex-1 text-center">{text}</span>}
             </>
           );
@@ -217,11 +272,24 @@ export const ButtonEnhanced = React.forwardRef<HTMLButtonElement, ButtonEnhanced
           return (
             <>
               {text && <span className="flex-1 text-center">{text}</span>}
-              {rightIcon && <span className={cn(sizeStyles.iconSize, "flex-shrink-0")}>{rightIcon}</span>}
+              {rightIcon && (
+                <span className={cn(sizeStyles.iconSize, "flex-shrink-0")}>
+                  {rightIcon}
+                </span>
+              )}
             </>
           );
         case "only-icon":
-          return <span className={cn(sizeStyles.iconSize, "flex-shrink-0")}>{icon || leftIcon || rightIcon}</span>;
+          return (
+            <span
+              className={cn(
+                sizeStyles.iconSize,
+                "flex-shrink-0 [&>svg]:w-full [&>svg]:h-full"
+              )}
+            >
+              {icon || leftIcon || rightIcon}
+            </span>
+          );
         case "only-text":
         default:
           return <span className="flex-1 text-center">{text || children}</span>;
@@ -238,7 +306,7 @@ export const ButtonEnhanced = React.forwardRef<HTMLButtonElement, ButtonEnhanced
         className={cn(
           // 기본 레이아웃
           "inline-flex items-center justify-center",
-          "border-[1px] rounded-[6px]", 
+          "border-[1px] rounded-[6px]",
           "focus:outline-none focus:ring-0",
           // Tailwind active 스케일 효과는 유지/제거 선택 가능
 
@@ -258,7 +326,6 @@ export const ButtonEnhanced = React.forwardRef<HTMLButtonElement, ButtonEnhanced
           className
         )}
         onClick={handleClick}
-
         // Pointer Events
         onPointerDown={handlePointerDown}
         onPointerUp={handlePointerUp}
@@ -266,11 +333,9 @@ export const ButtonEnhanced = React.forwardRef<HTMLButtonElement, ButtonEnhanced
         onPointerLeave={handlePointerLeave}
         onPointerCancel={handlePointerCancel}
         onLostPointerCapture={handleLostPointerCapture}
-
         // Keyboard
         onKeyDown={handleKeyDown}
         onKeyUp={handleKeyUp}
-
         // 포커스 잃으면 안전 복귀
         onBlur={() => setIsPressed(false)}
         {...props}

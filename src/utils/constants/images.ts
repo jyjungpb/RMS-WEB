@@ -13,7 +13,9 @@ import errorCountIcon from '@/assets/images/error_count_icon.svg';
 import diagnosisCountIcon from '@/assets/images/diagnosis_count_icon.svg';
 import deleteIcon from '@/assets/images/delete_icon.svg';
 import uploadIcon from '@/assets/images/upload_icon.svg';
+import downloadIcon from '@/assets/images/download_icon.svg';
 import { error } from 'console';
+import { DownloadCloud } from 'lucide-react';
 
 export const images = { 
     loginLogo,
@@ -31,6 +33,7 @@ export const images = {
     diagnosisCountIcon,
     deleteIcon,
     uploadIcon,
-
+    
+    downloadIcon,
 };
  

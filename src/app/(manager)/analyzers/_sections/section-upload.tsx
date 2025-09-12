@@ -7,6 +7,7 @@ import { Button, OutlineButton } from "@/components/ui/button-enhanced";
 import FormInputDemoPage from "@/app/(dashboard)/form-input-demo/page";
 import FormInput from "@/components/common/form-input";
 import { ButtonEnhanced } from "@/components/dashboard/button-enhanced";
+import AnalytesPage from "@/components/table/page";
 
 export default function UploadSection() {
   return (
@@ -58,7 +59,15 @@ export default function UploadSection() {
             업로드
           </ButtonEnhanced>
         </div>
+
+
       </div>
+
+      <div className={cn(" flex  justify-center items-center ")}>
+      <AnalytesPage></AnalytesPage>
+
+</div>
+
     </div>
   );
 }
